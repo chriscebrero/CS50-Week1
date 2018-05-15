@@ -1,0 +1,30 @@
+#include <stdio.h>
+#include <cs50.h>
+#include <math.h>
+
+int main(void)
+{
+    float amount;
+    do
+    {
+    amount = get_float("Change owed: ");
+    }
+    while (amount <= 0);
+
+    //convert the float into an integer
+    int roundedAmount = (int) round((amount * 100));
+    int toonies = (roundedAmount / 200);
+    int loonies = ((roundedAmount - (toonies * 200)) / 100);
+    int quarters = ((roundedAmount  - (toonies * 200) - (loonies * 100)) / 25);
+    int dimes = ((roundedAmount - (toonies * 200) - (loonies * 100) - (quarters * 25)) / 10);
+    int nickels = ((roundedAmount - (toonies * 200) - (loonies * 100) -(quarters * 25) - (dimes * 10)) / 5);
+    int pennies = ((roundedAmount - (toonies * 200) - (loonies * 100) - (quarters * 25) - (dimes * 10) - (nickels * 5)) / 1);
+
+    // finally count how many coins in total are used
+    int totalCoins = quarters + dimes + nickels + pennies;
+
+    printf("Change owed consists of %d toonies, %d loonies, %d quarters, %d dimes, %d nickels and %d pennies.\nAmount of coins is %d.\n", toonies, loonies, quarters, dimes, nickels, pennies, totalCoins);
+
+    // return 0 since everything went perfect
+    return 0;
+}
